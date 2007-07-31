@@ -1,0 +1,231 @@
+<script>
+	<!-- Information on Message Types -->
+	<!--
+		//Assumed to occur at every clock tick
+		//time(0) //and so on
+		
+		//*************************************************
+		//Messages for the Operator from the Environment
+		//*************************************************
+		 
+		// An aircraft exists in the specified location
+		aircraft(Name,Location).
+		
+		// An engine exists in the specified location 
+		// (which may be an aircraft), with the given
+		// number of previous usage cycles
+		// we assume engines need maintenance after
+		// 10 cycles
+		engine(Name,Location,Cycles,[Provenance]).
+		
+		// A flight is scheduled for the specified time 
+		scheduledFlight(Time,Operator,Aircraft,Origin,Destination).
+		// A fault has occured in the named engine
+		unscheduledEvent(Time,Aircraft,Location,Engine).
+		
+		//*************************************************
+		//Messages for the Operator from other Agents
+		//*************************************************
+		
+		// A contract violation has occurred between the 
+		// named Operator and manufacturer
+		violation(Operator,Manufacturer).
+		
+		// An aircraft has just been serviced
+		aircraftReady(Name,Location).
+		
+		//*************************************************
+		//Messages for the Engine Manufacturer 
+		// from the Airline Operator
+		//*************************************************
+		
+		// A request for an engine to be serviced at the
+		//  designated time in the designated location
+		//  scheduled maintenance requests have a Time
+		//  value in the future
+		requestMaintenance(Time,Aircraft,Location,Engine).
+		
+		// A placeholder message to request an aftercare
+		//  contract to be signed
+		requestContract(Operator, Terms).
+		
+		//*************************************************
+		//Messages for the Observer from the Environment
+		//*************************************************
+		
+		// An echo detectable by the observer when an Operator
+		//  requests maintenance to a Manufacturer
+		requestMaintenance(Time, Aircraft, Location, Engine, Operator, Manufacturer).
+		
+		// An echo detectable by the observer when a Manufacturer
+		//  performs a maintenance operation
+		maintenancePerformed(Time, Aircraft, Location, Engine, Operator, Manufacturer).
+		
+		// An echo detectable by the observer when a Manufacturer
+		//  moves an engine to a new location
+		engineMoved(Time,Engine,Location,Manufacturer).
+		
+		//*************************************************
+		//Messages for the Manager from the Observer
+		//*************************************************
+		
+		//A violation has been detected by the observer
+		violation(Type, Time, Location, Aircraft, Engine, Operator, Manufacturer).
+	 -->
+	<!-- Startup information -->
+	<step time="0">
+		aircraft(plane1, sanFierro).
+		aircraft(plane2, libertyCity).
+		aircraft(plane3, losSantos).
+		aircraft(plane4, lasVenturas).
+		
+		engine(engineA, plane1, 0, [simpleJet]).
+		engine(engineB, plane1, 0, [simpleJet]).
+		
+		engine(engineC, plane2, 2, [simpleJet]).
+		engine(engineD, plane2, 2, [simpleJet]).
+		
+		engine(engineE, plane3, 2, [millerAir]).
+		engine(engineF, plane3, 2, [millerAir]).
+		
+		engine(engineG, plane4, 9, [millerAir]).
+		engine(engineH, plane4, 9, [millerAir]).
+		
+		engine(engineR1, lasVenturas, 0, []).
+		engine(engineR2, lasVenturas, 0, []).
+		engine(engineR3, lasVenturas, 0, []).
+		engine(engineR4, lasVenturas, 0, []).
+		
+		engine(engineR5, lasVenturas, 5, [millerAir]).
+		engine(engineR6, lasVenturas, 5, [millerAir]).
+		
+		scheduledFlight(2, simpleJet, plane1, sanFierro, lasVenturas).
+		scheduledFlight(4, simpleJet, plane1, lasVenturas, sanFierro).
+		
+		scheduledFlight(2, simpleJet, plane2, losSantos, sanFierro).
+		scheduledFlight(4, simpleJet, plane2, sanFierro, losSantos).
+		
+		scheduledFlight(2, millerAir, plane3, losSantos, libertyCity).
+		scheduledFlight(4, millerAir, plane3, libertyCity, losSantos).
+		
+		scheduledFlight(2, millerAir, plane4, lasVenturas, losSantos).
+		scheduledFlight(4, millerAir, plane4, losSantos, lasVenturas).
+	</step>
+	
+	<step time="1">
+		<!-- At this point the agents should start communicating-->
+		<!-- Operators start requesting contracts -->
+		
+		<!-- SimpleJet does not want to share engines with Miller Air
+		SimpleJet sends:
+		requestContract(simpleJet, [maxDownTime(2), notShareEngine([millerAir]) ]).
+		 -->
+		 
+		 <!-- Miller Air has a very loose contract
+		Miller Air sends:
+		requestContract(millerAir, [maxDownTime(4)]).
+		 -->
+		 <!-- I will detail the engine manufacturer contract messages later -->
+	</step>
+	
+	<step time="2">
+		<!-- At this point the flights will start -->
+		<!-- MillerAir knows that its plane4 will need a scheduled 
+			maintenance in the next turn, so it can request maintenance
+			from the manufacturer 
+			
+			Miller Air sends:
+			requestMaintenance(3,plane4,losSantos,engineG).
+			requestMaintenance(3,plane4,losSantos,engineH).
+		-->
+		
+		<!-- And these requests echo in the environment -->
+		requestMaintenance(3, plane4, losSantos, engineG, millerAir, generalElectric).
+		requestMaintenance(3, plane4, losSantos, engineH, millerAir, generalElectric).
+		
+		<!-- All flights for MillerAir and SimpleJet should take place here -->
+		<!-- But no messages are generated in the environment -->
+	</step>
+	
+	<step time="3">
+		<!-- At this point General Electric should have moved to LosSantos
+		     to service engines G and H, and the echoes of this actions 
+		     should be perceived by the observer. -->
+		engineMoved(3, engineR1, losSantos, generalElectric).
+		engineMoved(3, engineR2, losSantos, generalElectric).
+		maintenancePerformed(3, plane4, losSantos, engineG, millerAir, generalElectric).
+		maintenancePerformed(3, plane4, losSantos, engineH, millerAir, generalElectric).
+		<!-- And the information regarding which engines are where should be 
+		     updated, as a result of the actions performed by the manufacturer
+		      -->
+		<!-- 
+		~engine(engineG, plane4, 9, [millerAir]).
+		~engine(engineH, plane4, 9, [millerAir]).
+		engine(engineG, losSantos, 10, [millerAir]).
+		engine(engineH, losSantos, 10, [millerAir]).
+		
+		~engine(engineR1, losSantos, 0, []).
+		~engine(engineR2, losSantos, 0, []).
+		engine(engineR1, plane4, 0, [millerAir]).
+		engine(engineR2, plane4, 0, [millerAir]).
+		 -->
+		 
+		<!-- After repairing plane4, general electric sends a message to
+			MillerAir notifying it of the plane being ready.
+		
+		GeneralElectric sends:
+		aircraftReady(plane4,losSantos).
+		 --> 
+		<!-- Similar information should be updated for the engines of all 
+		 	aircraft, since they have probably flown elsewhere at this point
+		 	in time. -->
+	</step>
+	
+	<step time="4">
+		<!-- Here we have more flights taking place as a result of the
+			scheduled flights generated in the beginning of the script. -->
+		<!-- We insert an unscheduled event here to simulate an engine 
+			needing maintenance before its number of cycles is reached. -->
+		
+		unscheduledEvent(4, plane1, lasVenturas, engineA).
+		
+		<!-- This should prompt SimpleJet to request maintenance.-->
+		<!-- SimpleJet sends:
+			requestMaintenance(4,plane1,lasVenturas,engineA).
+		 -->
+		<!-- And this request should also echo in the environment -->
+		requestMaintenance(4, plane1, lasVenturas, engineA, simpleJet, generalElectric).
+		
+		<!-- Aside from the flight of plane 1, the other flights should
+			take place at this point in time. -->
+	</step>
+	
+	<step time="5">
+		<!-- Here, GeneralElectric responds to the request to fix the 
+		    engine out of schedule. 
+		    We can always play with the response times, and the choice
+		    of engines to force contract violations. -->
+		<!-- These are the echoes of the actions by General Electric -->
+		
+		engineMoved(5, engineR3, lasVenturas, generalElectric).
+		maintenancePerformed(5, plane1, lasVenturas, engineA, simpleJet, generalElectric).
+		
+		<!-- And the information regarding which engines are where should be 
+		     updated, as a result of the actions performed by the manufacturer
+		      -->
+		<!-- 
+		~engine(engineA, plane1, 1, [simpleJet]).
+		engine(engineA, lasVenturas, 1, [simpleJet]).
+				
+		~engine(engineR3, losSantos, 0, []).
+		engine(engineR3, plane1, 0, [simpleJet]).
+		 -->
+		
+		<!-- After repairing plane1, GeneralElectric sends a message to
+			SimpleJet notifying it of the plane being ready.
+		
+		GeneralElectric sends:
+		aircraftReady(plane1, lasVenturas).
+		 --> 
+	</step>
+</script>
