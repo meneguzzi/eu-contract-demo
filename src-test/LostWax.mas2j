@@ -1,0 +1,17 @@
+/*
+
+Defines the LostWax Robots MAS
+
+*/
+
+MAS lostwax {
+
+    infrastructure: Centralised
+
+    environment: 
+         org.ist.contract.jason.ContractEnvironmentImpl("script.xml")
+
+    agents: 
+         airline //agentClass mds.MDSAgent 
+             ;
+}
