@@ -9,9 +9,15 @@ MAS lostwax {
     infrastructure: Centralised
 
     environment: 
-         org.ist.contract.jason.ContractEnvironmentImpl("script.xml")
+         org.ist.contract.jason.ContractEnvironmentImpl("script.xml","act")
 
     agents: 
          airline //agentClass mds.MDSAgent 
              ;
+         engineman //agentClass mds.MDSAgent
+         	;
+         manager //agentClass mds.MDSAgent
+         	;
+         observer //agentClass mds.MDSAgent
+         	;
 }
