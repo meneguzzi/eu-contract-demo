@@ -74,10 +74,10 @@
 	 -->
 	<!-- Startup information -->
 	<step time="0">
-		aircraft(plane1, sanFierro).
-		aircraft(plane2, libertyCity).
-		aircraft(plane3, losSantos).
-		aircraft(plane4, lasVenturas).
+		aircraft(plane1, sanFierro)[target(simpleJet)].
+		aircraft(plane2, libertyCity)[target(simpleJet)].
+		aircraft(plane3, losSantos)[target(millerAir)].
+		aircraft(plane4, lasVenturas)[target(millerAir)].
 		
 		engine(engineA, plane1, 0, [simpleJet]).
 		engine(engineB, plane1, 0, [simpleJet]).
@@ -227,5 +227,9 @@
 		GeneralElectric sends:
 		aircraftReady(plane1, lasVenturas).
 		 --> 
+	</step>
+	
+	<step time="10">
+		endSimulation.
 	</step>
 </script>
