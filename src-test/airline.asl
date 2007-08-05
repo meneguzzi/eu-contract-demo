@@ -53,7 +53,9 @@ myself(simpleJet).
 
 +!flyAircraft(Plane, From, To) : aircraft(Plane,From)
   <- flyPlane(Plane,From,To);
-  	 !print("Flying ", Plane," from ", From, " to ",To).
+  	 !print("Flying ", Plane," from ", From, " to ",To);
+  	 !print("Updating engines.");
+  	 !updateEngines(Plane).
 
 -aircraft(Plane,From) : true
   <- -aircraft(Plane,From);
@@ -63,14 +65,17 @@ myself(simpleJet).
   <- !print("Tried to fly ",Plane, " from an invalid location").
 
 +!updateEngines(Plane) : aircraft(Plane,Location)
-  <- .findall(engine(Plane,Engine),
+  <- .findall(engine(Engine,Plane),
   			  engine(Engine, Plane, Cycles, Provenance),
   			  Engines);
+  	 !processEngines(Engines);
+     true.
   	 
 +!processEngines([]) : true
   <- !print("Done processing engines");
   	 true.
 
-+!processEngines([Engine, Engines]) : engine(Engine, Plane, Cycles, Provenance)
-  <- //doSomething;
++!processEngines([engine(Engine,Plane), Engines]) : engine(Engine, Plane, Cycles, Provenance)
+  <- 
+     .send(engineman,tell,requestMaintenance(10,Plane,Location,Engine));
      !processEngines(Engines).

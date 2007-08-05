@@ -230,6 +230,6 @@
 	</step>
 	
 	<step time="10">
-		endSimulation.
+		//endSimulation.
 	</step>
 </script>

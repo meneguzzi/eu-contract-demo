@@ -1,3 +1,5 @@
+{include("print.asl")}
+
 myself(generalElectric).
 
 /*
@@ -10,3 +12,6 @@ myself(generalElectric).
 	   .print("New engine ", Name, " at ", Location, 
 		      " with ", Cycles, " cycles, and used by ",Provenance);
 	   true.
+
++requestMaintenance(10,Plane,Location,Engine) [source(S)] : true
+	<- !print(S," is requesting maintenance, screw him!").
