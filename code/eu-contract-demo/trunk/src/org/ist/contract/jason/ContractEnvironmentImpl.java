@@ -1,5 +1,9 @@
 package org.ist.contract.jason;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jason.asSyntax.Literal;
 import jason.environment.Environment;
 
 import org.ist.contract.ContractEnvironment;
@@ -18,5 +22,4 @@ public class ContractEnvironmentImpl extends ScriptedEnvironment implements
 		// TODO Auto-generated method stub
 
 	}
-
 }

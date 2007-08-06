@@ -2,7 +2,6 @@ package act;
 
 import jason.asSyntax.Literal;
 import jason.asSyntax.Term;
-import jason.environment.Environment;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -10,10 +9,27 @@ import java.util.logging.Logger;
 import org.ist.contract.jason.ContractEnvironmentImpl;
 import org.kcl.jason.env.action.ExternalAction;
 
+/**
+ * <p>External Action: <b><code>flyPlane</code></b>.
+ 
+   <p>Description: Simulates the flight of an aircraft between two locations.
+
+   <p>Parameters:<ul>
+   <li>+ plane: the plane to be flown.<br/>
+   <li>+ from: the original location of plane.<br/>
+   <li>+ to: the destination in which plane will end.<br/>
+   </ul>
+
+<p>Examples:<ul>
+<li> <code>flyPlane(plane1,losAngeles,newYork)</code>: true.
+</ul>
+ * @author meneguzz
+ *
+ */
 public class flyPlane implements ExternalAction<ContractEnvironmentImpl> {
 	private static final Logger logger = Logger.getLogger(ExternalAction.class.getName());
 
-	public List consequences(ContractEnvironmentImpl env, String agName, Term... terms) {
+	public List<Literal> consequences(ContractEnvironmentImpl env, String agName, Term... terms) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -32,9 +48,9 @@ public class flyPlane implements ExternalAction<ContractEnvironmentImpl> {
 				env.removePercept(aircraft);
 			}*/
 			Literal aircraft = Literal.parseLiteral("aircraft("+terms[0]+","+terms[1]+")");
-			env.removePercept(agName, aircraft);
+			env.removePercept(aircraft);
 			aircraft = Literal.parseLiteral("aircraft("+terms[0]+","+terms[2]+")");
-			env.addPercept(agName, aircraft);
+			env.addPercept(aircraft);
 		}
 		return true;
 	}
