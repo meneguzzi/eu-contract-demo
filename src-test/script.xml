@@ -88,13 +88,13 @@
 		engine(engineE, plane3, 2, [millerAir]).
 		engine(engineF, plane3, 2, [millerAir]).
 		
-		engine(engineG, plane4, 9, [millerAir]).
-		engine(engineH, plane4, 9, [millerAir]).
+		engine(engineG, plane4, 8, [millerAir]).
+		engine(engineH, plane4, 8, [millerAir]).
 		
 		engine(engineR1, lasVenturas, 0, []).
 		engine(engineR2, lasVenturas, 0, []).
-		engine(engineR3, lasVenturas, 0, []).
-		engine(engineR4, lasVenturas, 0, []).
+		engine(engineR3, losSantos, 0, []).
+		engine(engineR4, losSantos, 0, []).
 		
 		engine(engineR5, lasVenturas, 5, [millerAir]).
 		engine(engineR6, lasVenturas, 5, [millerAir]).
@@ -102,8 +102,8 @@
 		scheduledFlight(2, simpleJet, plane1, sanFierro, lasVenturas).
 		scheduledFlight(4, simpleJet, plane1, lasVenturas, sanFierro).
 		
-		scheduledFlight(2, simpleJet, plane2, losSantos, sanFierro).
-		scheduledFlight(4, simpleJet, plane2, sanFierro, losSantos).
+		scheduledFlight(2, simpleJet, plane2, libertyCity, sanFierro).
+		scheduledFlight(4, simpleJet, plane2, sanFierro, libertyCity).
 		
 		scheduledFlight(2, millerAir, plane3, losSantos, libertyCity).
 		scheduledFlight(4, millerAir, plane3, libertyCity, losSantos).
@@ -140,8 +140,10 @@
 		-->
 		
 		<!-- And these requests echo in the environment -->
+		<!-- 
 		requestMaintenance(3, plane4, losSantos, engineG, millerAir, generalElectric).
 		requestMaintenance(3, plane4, losSantos, engineH, millerAir, generalElectric).
+		 -->
 		
 		<!-- All flights for MillerAir and SimpleJet should take place here -->
 		<!-- But no messages are generated in the environment -->
@@ -151,10 +153,13 @@
 		<!-- At this point General Electric should have moved to LosSantos
 		     to service engines G and H, and the echoes of this actions 
 		     should be perceived by the observer. -->
+		<!-- 
 		engineMoved(3, engineR1, losSantos, generalElectric).
 		engineMoved(3, engineR2, losSantos, generalElectric).
 		maintenancePerformed(3, plane4, losSantos, engineG, millerAir, generalElectric).
 		maintenancePerformed(3, plane4, losSantos, engineH, millerAir, generalElectric).
+		 -->
+		 
 		<!-- And the information regarding which engines are where should be 
 		     updated, as a result of the actions performed by the manufacturer
 		      -->
@@ -194,7 +199,9 @@
 			requestMaintenance(4,plane1,lasVenturas,engineA).
 		 -->
 		<!-- And this request should also echo in the environment -->
+		<!--
 		requestMaintenance(4, plane1, lasVenturas, engineA, simpleJet, generalElectric).
+		-->
 		
 		<!-- Aside from the flight of plane 1, the other flights should
 			take place at this point in time. -->
@@ -206,9 +213,10 @@
 		    We can always play with the response times, and the choice
 		    of engines to force contract violations. -->
 		<!-- These are the echoes of the actions by General Electric -->
-		
+		<!-- 
 		engineMoved(5, engineR3, lasVenturas, generalElectric).
 		maintenancePerformed(5, plane1, lasVenturas, engineA, simpleJet, generalElectric).
+		 -->
 		
 		<!-- And the information regarding which engines are where should be 
 		     updated, as a result of the actions performed by the manufacturer
