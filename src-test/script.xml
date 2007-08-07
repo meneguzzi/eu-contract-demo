@@ -72,6 +72,8 @@
 		//A violation has been detected by the observer
 		violation(Type, Time, Location, Aircraft, Engine, Operator, Manufacturer).
 	 -->
+	 <!-- Islander - Carles Sierra -->
+	 <!-- XXX Check this out -->
 	<!-- Startup information -->
 	<step time="0">
 		aircraft(plane1, sanFierro)[target(simpleJet)].
