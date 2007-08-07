@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     7 Aug 2007 12:52:58                                                        
+
+     eu-contract-demo    
+     Demonstration application of Contract Technology
+                   
+     meneguzz                                                                
+     ====================================================================== -->
+<project name="eu-contract-demo" default="jar">
+    <description>
+            Demonstration application of Contract Technology
+    </description>
+	
+	<property name="build.dir" value="${basedir}/bin/classes" />
+	<property name="jason.jar" value="${basedir}/lib/jason.jar"/>
+	<property name="jasonenv.jar" value="${basedir}/lib/jasonenv.jar"/>
+
+	<path id="run.classpath">
+		<pathelement location="${jason.jar}" />
+		<pathelement location="${jasonenv.jar}" />
+		<pathelement location="${build.dir}" />
+	</path>
+	
+	<path id="project.classpath">
+		<path refid="run.classpath" />
+	</path>
+
+    <!-- ================================= 
+          target: jar              
+         ================================= -->
+    <target name="jar" depends="compile" description="--> Demonstration application of Contract Technology">
+        <jar destfile="contract-demo.jar" basedir="${build.dir}/classes">
+        	
+        </jar>
+    </target>
+	
+	<!-- =================================
+		  target: compile
+	     ================================= -->
+	<target name="compile" depends="init">
+		<javac srcdir="src" destdir="${build.dir}" debug="true" deprecation="true" optimize="true" nowarn="true" source="1.5" target="1.5">
+			<classpath refid="project.classpath" />
+		</javac>
+		<javac srcdir="src-test" destdir="${build.dir}" debug="true" deprecation="true" optimize="true" nowarn="true" source="1.5" target="1.5">
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: init                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="init">
+    	<mkdir dir="bin"/>
+    	<mkdir dir="bin/classes"/>
+    </target>
+	
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+    <target name="clean" depends="init" description="--> Cleans temporary resources">
+        <delete dir="${basedir}/bin/classes"/>
+    </target>
+
+
+</project>
