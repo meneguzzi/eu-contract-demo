@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="786,677" id="org.ist.contract.model" metadata="uml2-1.0" initialized="true" tag="5" key="32303037303533312D352065752D636F6E7472616374">
+  <children xsi:type="editmodel:InterfaceEditModel" name="Contract" location="371,105" size="107,135" id="org.ist.contract.model/Contract" runTimeClassModel="getParties(),isTemplate(),getClauses(),getContext()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="84,72">
+      <children xsi:type="editmodel:MethodEditModel" name="getClauses" id="org.ist.contract.model/Contract#getClauses()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getContext" id="org.ist.contract.model/Contract#getContext()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getParties" id="org.ist.contract.model/Contract#getParties()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isTemplate" id="org.ist.contract.model/Contract#isTemplate()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="org.ist.contract.model/Contract->org.ist.contract.model/ContractElement" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.1" label="//@children.0/@sourceConnections.0/@children.2" sourceEnd="//@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="53,135" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="79,0"/>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="java.lang/Iterable&lt;-org.ist.contract.model/Contract" source="//@children.0" target="//@children.4" targetEnd="//@children.0/@sourceConnections.1/@children.1" sourceEnd="//@children.0/@sourceConnections.1/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="53,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="59,95"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.0/@sourceConnections.0" name="ContractElement" location="345,360" size="147,225" id="org.ist.contract.model/ContractElement" runTimeClassModel="isParty(),getId(),isContext(),getValue(),getType(),isRole(),isObligation(),isProhibition(),isClause()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="87,162">
+      <children xsi:type="editmodel:MethodEditModel" name="getId" id="org.ist.contract.model/ContractElement#getId()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getType" id="org.ist.contract.model/ContractElement#getType()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getValue" id="org.ist.contract.model/ContractElement#getValue()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isClause" id="org.ist.contract.model/ContractElement#isClause()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isContext" id="org.ist.contract.model/ContractElement#isContext()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isObligation" id="org.ist.contract.model/ContractElement#isObligation()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isParty" id="org.ist.contract.model/ContractElement#isParty()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isProhibition" id="org.ist.contract.model/ContractElement#isProhibition()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isRole" id="org.ist.contract.model/ContractElement#isRole()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="org.ist.contract.model/ContractElement-Soyatec::Import->org.ist.contract.model/ElementType" source="//@children.1" target="//@children.2" targetEnd="//@children.1/@sourceConnections.0/@children.2" label="//@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,141" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="125,21"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="org.ist.contract.model/ContractElement-Soyatec::Import->org.ist.contract.model/ElementValue" source="//@children.1" target="//@children.3" targetEnd="//@children.1/@sourceConnections.1/@children.2" label="//@children.1/@sourceConnections.1/@children.0" sourceEnd="//@children.1/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,51" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="131,21"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@sourceConnections.0" name="ElementType" location="45,480" size="125,43" id="org.ist.contract.model/ElementType" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@sourceConnections.1" name="ElementValue" location="45,390" size="131,43" id="org.ist.contract.model/ElementValue" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.0/@sourceConnections.1" name="Iterable" location="365,-45" size="119,95" id="java.lang/Iterable" runTimeClassModel="iterator()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="64,18">
+      <children xsi:type="editmodel:MethodEditModel" name="iterator" id="java.lang/Iterable#iterator()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
