@@ -12,10 +12,14 @@ MAS lostwax {
          org.ist.contract.jason.ContractEnvironmentImpl("script.xml","act")
 
     agents: 
-         airline //agentClass mds.MDSAgent 
-             ;
-         engineman //agentClass mds.MDSAgent
-         	;
+         //airline //agentClass mds.MDSAgent;
+         simpleJet;
+         millerAir;
+         
+         //engineman //agentClass mds.MDSAgent;
+         rollsJoyce;
+         generalKinetic;
+         
          manager //agentClass mds.MDSAgent
          	;
          observer //agentClass mds.MDSAgent

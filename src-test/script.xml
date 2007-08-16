@@ -9,7 +9,7 @@
 		//*************************************************
 		 
 		// An aircraft exists in the specified location
-		aircraft(Name,Location).
+		aircraft(Name, Owner, Location).
 		
 		// An engine exists in the specified location 
 		// (which may be an aircraft), with the given
@@ -76,10 +76,10 @@
 	 <!-- XXX Check this out -->
 	<!-- Startup information -->
 	<step time="0">
-		aircraft(plane1, sanFierro)[target(simpleJet)].
-		aircraft(plane2, libertyCity)[target(simpleJet)].
-		aircraft(plane3, losSantos)[target(millerAir)].
-		aircraft(plane4, lasVenturas)[target(millerAir)].
+		aircraft(plane1, simpleJet, sanFierro)[target(simpleJet)].
+		aircraft(plane2, simpleJet, libertyCity)[target(simpleJet)].
+		aircraft(plane3, millerAir, losSantos)[target(millerAir)].
+		aircraft(plane4, millerAir, lasVenturas)[target(millerAir)].
 		
 		engine(engineA, plane1, 0, [simpleJet]).
 		engine(engineB, plane1, 0, [simpleJet]).
@@ -101,17 +101,17 @@
 		engine(engineR5, lasVenturas, 5, [millerAir]).
 		engine(engineR6, lasVenturas, 5, [millerAir]).
 		
-		scheduledFlight(2, simpleJet, plane1, sanFierro, lasVenturas).
-		scheduledFlight(4, simpleJet, plane1, lasVenturas, sanFierro).
+		scheduledFlight(6, simpleJet, plane1, sanFierro, lasVenturas).
+		scheduledFlight(10, simpleJet, plane1, lasVenturas, sanFierro).
 		
-		scheduledFlight(2, simpleJet, plane2, libertyCity, sanFierro).
-		scheduledFlight(4, simpleJet, plane2, sanFierro, libertyCity).
+		scheduledFlight(6, simpleJet, plane2, libertyCity, sanFierro).
+		scheduledFlight(10, simpleJet, plane2, sanFierro, libertyCity).
 		
-		scheduledFlight(2, millerAir, plane3, losSantos, libertyCity).
-		scheduledFlight(4, millerAir, plane3, libertyCity, losSantos).
+		scheduledFlight(6, millerAir, plane3, losSantos, libertyCity).
+		scheduledFlight(10, millerAir, plane3, libertyCity, losSantos).
 		
-		scheduledFlight(2, millerAir, plane4, lasVenturas, losSantos).
-		scheduledFlight(4, millerAir, plane4, losSantos, lasVenturas).
+		scheduledFlight(6, millerAir, plane4, lasVenturas, losSantos).
+		scheduledFlight(10, millerAir, plane4, losSantos, lasVenturas).
 	</step>
 	
 	<step time="1">
@@ -123,7 +123,7 @@
 		requestContract(simpleJet, [maxDownTime(2), notShareEngine([millerAir]) ]).
 		 -->
 		 
-		 <!-- Miller Air has a very loose contract
+		<!-- Miller Air has a very loose contract
 		Miller Air sends:
 		requestContract(millerAir, [maxDownTime(4)]).
 		 -->

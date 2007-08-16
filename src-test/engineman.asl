@@ -1,6 +1,7 @@
 {include("print.asl")}
 
-myself(generalElectric).
+//myself(generalElectric).
+//preferredPartner(simpleJet).
 
 /*
 +time(T) [source(S)] : true
@@ -10,9 +11,33 @@ myself(generalElectric).
 +engine(Name,Location,Cycles,Provenance) : true
 	<- //+engine(Name,Location,Cycles,Provenance);
 	   //!print("New engine ", Name, " at ", Location, " with ", Cycles, " cycles, and used by ",Provenance);
-	   
 	   true.
 
+//*********************************************************
+//Contract-making plans
++requestContract(A, Terms) [source(Airline)] : true
+	<- .print(Airline, " is requesting a contract, with terms: ", Terms);
+	   !evaluateContract(Airline, Terms);
+	   true.
+
++!evaluateContract(Airline, Terms) : preferredPartner(Airline)
+	<- .print("I like ", Airline, " accepting contract.");
+	   !acceptContract(Airline);
+	   true.
+
++!evaluateContract(Airline, Terms) : true
+	<- .print(Airline, " is not my preferred partner, not accepting the contract.");
+	   true.
+
+//Accepts the contract, signs it (in theory), and sends confirmation to the
+//Airline
++!acceptContract(Airline) : myself(Myself)
+	<- .send(Airline, tell, acceptContract(Myself,[]));
+	   +airline(Airline);
+	   true.
+
+//*********************************************************
+//Maintenance plans
 @pb2[atomic]
 +requestMaintenance(T,Plane,Location,Engine) [source(S)]
 	: engine(Engine, Plane, Cycles, Provenance) 
@@ -23,7 +48,7 @@ myself(generalElectric).
 	   true.
 
 +!performMaintenance(Plane,Location,Engine) 
-	: aircraft(Plane, Location) & engine(Engine, Plane, _, _) &
+	: aircraft(Plane, Airline, Location) & engine(Engine, Plane, _, _) &
 	  engine(Replacement, Location, _, _) & free(Replacement)
 	<- .print("Performing maintenance on ",Plane);
 	   +testing(Engine);
@@ -31,7 +56,7 @@ myself(generalElectric).
 	   true.
 
 +!performMaintenance(Plane,Location,Engine)
-	: aircraft(Plane, Location) & engine(Engine, Plane, _, _) &
+	: aircraft(Plane, Airline, Location) & engine(Engine, Plane, _, _) &
 	  engine(Replacement, RepLocation, _, _) & free(Replacement)
 	 <- !print("Need to replace ",Engine, " but there's no replacement at ", Location);
 	 	.print("Bringing ",Replacement," from ",RepLocation);
@@ -57,7 +82,7 @@ myself(generalElectric).
 +!addFreeEngines([]) : true
 	<- true.
 
-+!addFreeEngines([engine(Engine, Location) | Engines]) : aircraft(Location,_)
++!addFreeEngines([engine(Engine, Location) | Engines]) : aircraft(Location, _, _)
 	<- -free(Engine);
 	   !addFreeEngines(Engines);
 	   true.
