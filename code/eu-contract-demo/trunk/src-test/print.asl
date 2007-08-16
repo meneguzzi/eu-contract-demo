@@ -1,5 +1,5 @@
 //logging(true).
-logging(false).
+//logging(false).
 
 +!print(M) : logging(true)
 	<- .print(M).

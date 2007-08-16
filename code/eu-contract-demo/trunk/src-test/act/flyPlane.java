@@ -47,9 +47,9 @@ public class flyPlane implements ExternalAction<ContractEnvironmentImpl> {
 			} else {
 				env.removePercept(aircraft);
 			}*/
-			Literal aircraft = Literal.parseLiteral("aircraft("+terms[0]+","+terms[1]+")");
+			Literal aircraft = Literal.parseLiteral("aircraft("+terms[0]+","+agName+","+terms[1]+")");
 			env.removePercept(aircraft);
-			aircraft = Literal.parseLiteral("aircraft("+terms[0]+","+terms[2]+")");
+			aircraft = Literal.parseLiteral("aircraft("+terms[0]+","+agName+","+terms[2]+")");
 			env.addPercept(aircraft);
 		}
 		return true;
