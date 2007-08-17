@@ -103,15 +103,23 @@
 		
 		scheduledFlight(6, simpleJet, plane1, sanFierro, lasVenturas).
 		scheduledFlight(10, simpleJet, plane1, lasVenturas, sanFierro).
+		scheduledFlight(14, simpleJet, plane1, sanFierro, lasVenturas).
+		scheduledFlight(18, simpleJet, plane1, lasVenturas, sanFierro).
 		
 		scheduledFlight(6, simpleJet, plane2, libertyCity, sanFierro).
 		scheduledFlight(10, simpleJet, plane2, sanFierro, libertyCity).
+		scheduledFlight(14, simpleJet, plane2, libertyCity, sanFierro).
+		scheduledFlight(18, simpleJet, plane2, sanFierro, libertyCity).
 		
 		scheduledFlight(6, millerAir, plane3, losSantos, libertyCity).
 		scheduledFlight(10, millerAir, plane3, libertyCity, losSantos).
+		scheduledFlight(14, millerAir, plane3, losSantos, libertyCity).
+		scheduledFlight(18, millerAir, plane3, libertyCity, losSantos).
 		
 		scheduledFlight(6, millerAir, plane4, lasVenturas, losSantos).
 		scheduledFlight(10, millerAir, plane4, losSantos, lasVenturas).
+		scheduledFlight(14, millerAir, plane4, lasVenturas, losSantos).
+		scheduledFlight(18, millerAir, plane4, losSantos, lasVenturas).
 	</step>
 	
 	<step time="1">
@@ -191,19 +199,6 @@
 	<step time="4">
 		<!-- Here we have more flights taking place as a result of the
 			scheduled flights generated in the beginning of the script. -->
-		<!-- We insert an unscheduled event here to simulate an engine 
-			needing maintenance before its number of cycles is reached. -->
-		
-		unscheduledEvent(4, plane1, lasVenturas, engineA).
-		
-		<!-- This should prompt SimpleJet to request maintenance.-->
-		<!-- SimpleJet sends:
-			requestMaintenance(4,plane1,lasVenturas,engineA).
-		 -->
-		<!-- And this request should also echo in the environment -->
-		<!--
-		requestMaintenance(4, plane1, lasVenturas, engineA, simpleJet, generalElectric).
-		-->
 		
 		<!-- Aside from the flight of plane 1, the other flights should
 			take place at this point in time. -->
@@ -237,6 +232,22 @@
 		GeneralElectric sends:
 		aircraftReady(plane1, lasVenturas).
 		 --> 
+	</step>
+	
+	<step time="8">
+		<!-- We insert an unscheduled event here to simulate an engine 
+			needing maintenance before its number of cycles is reached. -->
+		
+		unscheduledEvent(4, plane1, lasVenturas, engineA).
+		
+		<!-- This should prompt SimpleJet to request maintenance.-->
+		<!-- SimpleJet sends:
+			requestMaintenance(4,plane1,lasVenturas,engineA).
+		 -->
+		<!-- And this request should also echo in the environment -->
+		<!--
+		requestMaintenance(4, plane1, lasVenturas, engineA, simpleJet, generalElectric).
+		-->
 	</step>
 	
 	<step time="10">

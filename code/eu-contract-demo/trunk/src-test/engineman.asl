@@ -1,4 +1,6 @@
 {include("print.asl")}
+{include("constants.asl")}
+{include("contract.asl")}
 
 //myself(generalElectric).
 //preferredPartner(simpleJet).
@@ -31,8 +33,10 @@
 
 //Accepts the contract, signs it (in theory), and sends confirmation to the
 //Airline
-+!acceptContract(Airline) : myself(Myself)
-	<- .send(Airline, tell, acceptContract(Myself,[]));
++!acceptContract(Airline) : true
+	<- //.send(Airline, tell, acceptContract(Myself,[]));
+	   //Changes to allow the observer to be notified
+	   !contractSend(Airline, tell, acceptContract([]));
 	   +airline(Airline);
 	   true.
 
