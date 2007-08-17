@@ -1,5 +1,6 @@
 {include("print.asl")}
 {include("constants.asl")}
+{include("contract.asl")}
 
 //myself(simpleJet).
 //contract(rollsJoyce).
@@ -35,7 +36,7 @@
 	<- .broadcast(tell,requestContract(M, [maxDownTime(4)]));
 	   true.
 
-+acceptContract(EngineMan, Terms) [source(E)] : true
++acceptContract(Terms) [source(EngineMan)] : true
 	<- .print(EngineMan, " accepted my contract.");
 	   +engineManufacturer(EngineMan);
 	   true.
@@ -80,13 +81,13 @@
 
 //We only need to check the engine if it is on a plane
 +!checkEngineMaintenance([engine(Engine, Plane) | Engines]) 
-   : aircraft(Plane, Airline, Location)
-   <- !print("Engine ",Engine," is in ",Plane);
+   : myself(Airline) & aircraft(Plane, Airline, Location)
+   <- !print("Engine ",Engine," is in my ",Plane);
 	  !needsMaintenance(engine(Engine, Plane));
 	  !checkEngineMaintenance(Engines).
 
 +!checkEngineMaintenance([engine(Engine, Location) | Engines]) : true
-	<- !print("Engine ",Engine," is not on a plane, but on ",Location);
+	<- !print("Engine ",Engine," is not on a plane of mine, but on ",Location);
 	   !checkEngineMaintenance(Engines).
 
 +!needsMaintenance(engine(Engine,Plane)) 
@@ -150,5 +151,7 @@
   <- .print("Requesting maintenance for ",Engine," at ", Location);
 	 //.send(engineman,tell,requestMaintenance(Time,Plane,Location,Engine));
 	 //With the proper multi party plans, we have to check who our partner is
-	 .send(EngineMan,tell,requestMaintenance(Time,Plane,Location,Engine));
+	 //.send(EngineMan,tell,requestMaintenance(Time,Plane,Location,Engine));
+	 //With an observer, we have to use the proper plans for that
+	 !contractSend(EngineMan,tell,requestMaintenance(Time,Plane,Location,Engine));
 	 true.
