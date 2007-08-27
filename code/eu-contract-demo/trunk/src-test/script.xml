@@ -21,7 +21,7 @@
 		// A flight is scheduled for the specified time 
 		scheduledFlight(Time,Operator,Aircraft,Origin,Destination).
 		// A fault has occured in the named engine
-		unscheduledEvent(Time,Aircraft,Location,Engine).
+		unscheduledEvent(Time,Engine).
 		
 		//*************************************************
 		//Messages for the Operator from other Agents
@@ -238,7 +238,7 @@
 		<!-- We insert an unscheduled event here to simulate an engine 
 			needing maintenance before its number of cycles is reached. -->
 		
-		unscheduledEvent(4, plane1, lasVenturas, engineA).
+		unscheduledEvent(8, engineA).
 		
 		<!-- This should prompt SimpleJet to request maintenance.-->
 		<!-- SimpleJet sends:
