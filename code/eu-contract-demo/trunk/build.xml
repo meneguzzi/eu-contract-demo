@@ -12,7 +12,7 @@
             Demonstration application of Contract Technology
     </description>
 	
-	<property name="build.dir" value="${basedir}/bin/classes" />
+	<property name="build.dir" value="${basedir}/bin" />
 	<property name="jason.jar" value="${basedir}/lib/jason.jar"/>
 	<property name="jasonenv.jar" value="${basedir}/lib/jasonenv.jar"/>
 
@@ -30,8 +30,17 @@
           target: jar              
          ================================= -->
     <target name="jar" depends="compile" description="--> Demonstration application of Contract Technology">
-        <jar destfile="contract-demo.jar" basedir="${build.dir}/classes">
-        	
+        <jar destfile="lib/contract-demo.jar" basedir="${build.dir}/classes">
+        	<manifest>
+        		<attribute name="Main-Class" value="jason.infra.centralised.RunCentralisedMAS" />
+				<attribute name="Class-Path" value="jason.jar,jasonenv.jar"/>
+        	</manifest>
+        	<fileset dir="${basedir}/bin">
+				<include name="**/*.class" />
+			</fileset>
+			<fileset dir="${basedir}/src-test">
+				<include name="**/*.*"/>
+			</fileset>
         </jar>
     </target>
 	
